@@ -7,7 +7,7 @@ app.get("/", function(req, res) {
 })
 
 app.get("/segunda", function(req, res) {
-    res.send("Minha SEGUNDA requisição")
+    res.send("Minha 2ª requisição")
 })
 
 app.listen(port, function() {
