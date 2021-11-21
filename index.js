@@ -8,9 +8,12 @@ app.get("/", function(request, response) {
     response.send("Dasa Educa - Artigos");
 });
 
+const database = require("./models")
+database.sequelizeDatabase.sync()
+
 const router = require("./routes/artigos.routes");
 router(app);
 
 app.listen(port, function() {
     console.log("Ouvindo a porta: ", port);
-});
+}); 

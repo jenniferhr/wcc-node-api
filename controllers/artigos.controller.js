@@ -19,4 +19,4 @@ exports.create = (request, response) => {
         console.log(error);
         response.status(500).send("Ocorreu um erro ao salvar o artigo");
     })
-};
+}; 
