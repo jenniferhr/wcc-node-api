@@ -14,9 +14,21 @@ exports.create = (request, response) => {
     // ou ela pode ser rejeitada (exemplo: ocorreu um erro ao tentar salvar)
 
     tabelaArtigos.create(artigo)
-    .then(() => response.send("Artigo criado com sucesso"))
-    .catch((error) => {
+    .then(function () {
+        response.send("Artigo criado com sucesso")
+    })
+    .catch(function (error) {
         console.log(error);
         response.status(500).send("Ocorreu um erro ao salvar o artigo");
     })
 }; 
+
+exports.findAll = (request, response) => {
+    tabelaArtigos.findAll()
+    .then(function (data) {
+        response.send(data)
+    })
+    .catch(function () {
+        response.status(500).send("Ocorreu um erro ao buscar todos os artigos")
+    })
+}
