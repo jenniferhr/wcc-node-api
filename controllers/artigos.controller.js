@@ -32,3 +32,44 @@ exports.findAll = (request, response) => {
         response.status(500).send("Ocorreu um erro ao buscar todos os artigos")
     })
 }
+
+exports.findByTitle = (request, response) => {
+    const tituloArtigo = request.query.titulo;
+    tabelaArtigos
+        .findOne({ where: {titulo: tituloArtigo} })
+        .then(function (data) {
+            if (data) {
+                response.send(data)
+            } else {
+                response.status(404).send({
+                    message: "Não foi possível encontrar um artigo com o título " + tituloArtigo,
+                })
+            }
+        })
+        .catch(function () {
+            response.status(500).send({
+                message: "Ocorreu um erro ao buscar o artigo com título " + tituloArtigo,
+            })
+        })
+}
+
+exports.findById = (request, response) => {
+    const idArtigo = request.query.id
+    tabelaArtigos
+        .findByPk(idArtigo)
+        .then(function (data) {
+            if (data) {
+                response.send(data)
+            } else {
+                response.status(404).send({
+                    message: "Não foi possível encontrar um artigo com o id " + idArtigo,
+                })
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+            response.status(500).send({
+                message: "Ocorreu um erro ao buscar um artigo com o título " + idArtigo,
+            })
+        })
+}
