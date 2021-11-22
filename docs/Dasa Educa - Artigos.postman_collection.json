@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "31c6369e-3ef3-46c6-8a4d-17245d2a53c8",
+		"name": "Dasa Educa - Artigos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Requisição base",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Connection-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Meu novo artigo\",\r\n    \"descricao\": \"tentativa nova?\",\r\n    \"publicado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}artigos/",
+					"host": [
+						"{{host}}artigos"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Artigo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Connection-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Dasa: um novo tempo\",\r\n    \"descricao\": \"A Dasa é uma das maiores healthtechs do Brasil\",\r\n    \"publicado\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}artigos/",
+					"host": [
+						"{{host}}artigos"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retornar Todos Os Artigos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Connection-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Meu novo artigo\",\r\n    \"descricao\": \"tentativa nova?\",\r\n    \"publicado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}artigos/",
+					"host": [
+						"{{host}}artigos"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retornar Artigo pelo Nome",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Connection-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Meu novo artigo\",\r\n    \"descricao\": \"tentativa nova?\",\r\n    \"publicado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}artigos/findByTitle?titulo=Meu primeiro artigo",
+					"host": [
+						"{{host}}artigos"
+					],
+					"path": [
+						"findByTitle"
+					],
+					"query": [
+						{
+							"key": "titulo",
+							"value": "Meu primeiro artigo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retornar Artigo pelo Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Connection-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Meu novo artigo\",\r\n    \"descricao\": \"tentativa nova?\",\r\n    \"publicado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}artigos/findById?id=5",
+					"host": [
+						"{{host}}artigos"
+					],
+					"path": [
+						"findById"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retornar Artigos Publicados",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Connection-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Meu novo artigo\",\r\n    \"descricao\": \"tentativa nova?\",\r\n    \"publicado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}artigos/published",
+					"host": [
+						"{{host}}artigos"
+					],
+					"path": [
+						"published"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualiza Artigos",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Connection-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"publicado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}artigos/8",
+					"host": [
+						"{{host}}artigos"
+					],
+					"path": [
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualiza Vários Artigos",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Connection-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"publicado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}artigos/5",
+					"host": [
+						"{{host}}artigos"
+					],
+					"path": [
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Artigos",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Connection-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"publicado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}artigos",
+					"host": [
+						"{{host}}artigos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deleta Artigo pelo id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Connection-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"publicado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}artigos/7",
+					"host": [
+						"{{host}}artigos"
+					],
+					"path": [
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080/"
+		}
+	]
+}
