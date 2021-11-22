@@ -32,5 +32,9 @@ module.exports = (app) => {
 
     router.put("/", artigosController.updateMany)
 
+    router.delete("/", artigosController.deleteAll)
+
+    router.delete("/:id", artigosController.delete)
+
     app.use("/artigos", router);
 }

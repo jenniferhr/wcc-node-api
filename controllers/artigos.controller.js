@@ -164,6 +164,37 @@ exports.updateMany = (rquest, response) => {
         })
 }
 
+exports.deleteAll = (request, response) => {
+    tabelaArtigos
+        .destroy({ where: {}, truncate: false})
+        .then(function(itemsDeletados) {
+            response.send("Foram deletados " + itemsDeletados + " artigos")
+        })
+        .catch(function(error) {
+            response
+                .status(500)
+                .send("Ocorreu um erro ao deletar os artigos")
+        })
+}
+
+exports.delete = (request, response) => {
+    const { id: idArtigo } = request.params
+    tabelaArtigos
+        .destroy({ where: { id: idArtigo} })
+        .then(function(itemsDeletados) {
+            if (itemsDeletados === 0) {
+                response.send("O item com ID " + idArtigo + " não foi encontrado")
+            } else {
+                response.send("Artigo " + idArtigo + " deletado com sucesso")
+            }            
+        })
+        .catch(function(error) {
+            response
+                .status(500)
+                .send("Ocorreu um erro ao tentar deletar o artigo" + idArtigo)
+        })
+}
+
 //exemplo de atribuição e renomeação
 
 const desestruturaObj = () => {
