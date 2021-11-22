@@ -1,4 +1,5 @@
 // regras de negócio do sistema de artigos
+const { request } = require("express");
 const database = require("../models");
 const tabelaArtigos = database.artigos;
 
@@ -40,6 +41,19 @@ exports.findAll = (request, response) => {
             .status(500)
             .send("Ocorreu um erro ao buscar todos os artigos")
     })
+}
+
+exports.findAllPublished = (request, response) => {
+    tabelaArtigos
+        .findAll({ where: {publicado: true}})
+        .then(function (data) {
+            response.send(data)
+        })
+        .catch(function () {
+            response
+                .send(500)
+                .send("Ocorreu um erro ao encontrar os usuários ativos")
+        })
 }
 
 exports.findByTitle = (request, response) => {
@@ -92,6 +106,61 @@ exports.findById = (request, response) => {
             response.status(500).send({
                 message: "Ocorreu um erro ao buscar um artigo com o título " + idArtigo,
             })
+        })
+}
+
+exports.update = (request, response) => {
+    const { body: updates } = request
+    const { id: idArtigo } = request.params
+    const query = { where: { id: idArtigo }, returning: true}
+
+    tabelaArtigos
+        .update(updates, query)
+        .then(function (data) {
+            //quando returning: true, o sequelize nos retorna uma lista com duas coisas: -a quantidade de itens atualizados - a lista dos atualizados
+            // [0, []]
+            //[1, [{artigo atualizado}]]
+            const linhasAtualizadas = data[0]
+            if (linhasAtualizadas === 0) {
+                response
+                    .status(404)
+                    .send("Não foi encontrado nenhum registro para ser atualizado a partir do id: " +
+                    idArtigo)
+            } else {
+                const artigosAtualizados = data[1]
+                response.send(artigosAtualizados)
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+            response.status(500).send("Ocorreu um erro ao atualizar o arquivo")
+        })
+}
+
+exports.updateMany = (rquest, response) => {
+    const { body: updates} = request
+    //const { id: idArtigo } = request.params
+    const query = {
+        returning: true,
+        where: { descricao: "descricao do artigo"},
+    }
+
+    tabelaArtigos
+        .update(updates, query)
+        .then(function (data) {
+            console.log(data)
+            const linhasAtualizadas = data[0]
+            if (linhasAtualizadas === 0) {
+                response
+                .status(404)
+                .send("Não foi encontrado nenhum registro para ser atualizado")
+            } else {
+                const artigosAtualizados = data[1];
+                response.send(artigosAtualizados)
+            }
+        })
+        .catch(function (error) {
+            response.status(500).send("Ocorreu um erro ao atualizar os artigos")
         })
 }
 

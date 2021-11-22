@@ -11,6 +11,7 @@
         - Publicar meu artigo
     DELETE
         - Deletar um artigo
+        - Deletar todos os artigos
 */
 
 module.exports = (app) => {
@@ -21,9 +22,15 @@ module.exports = (app) => {
 
     router.get("/", artigosController.findAll)
 
+    router.get("/published", artigosController.findAllPublished)
+
     router.get("/findByTitle", artigosController.findByTitle)
 
     router.get("/findById", artigosController.findById)
+
+    router.put("/:id", artigosController.update)
+
+    router.put("/", artigosController.updateMany)
 
     app.use("/artigos", router);
 }
