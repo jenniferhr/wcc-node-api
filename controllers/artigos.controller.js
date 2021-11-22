@@ -4,14 +4,19 @@ const tabelaArtigos = database.artigos;
 
 // Cria um novo artigo
 exports.create = (request, response) => {
+    //object destructuring ou desestruturação de objeto
+    const { titulo, descricao, publicado } = request.body
     const artigo = {
-        titulo: request.body.titulo,
-        descricao: request.body.descricao,
-        publicado: request.body.publicado
+        titulo, //titulo: titulo
+        descricao,
+        publicado,
     };
 
-    // a promise pode ser resolvida
-    // ou ela pode ser rejeitada (exemplo: ocorreu um erro ao tentar salvar)
+    if (!titulo) {
+        return response
+            .status(400)
+            .send("O artigo precisa conter ao menos o título definido")
+    }
 
     tabelaArtigos.create(artigo)
     .then(function () {
@@ -19,7 +24,9 @@ exports.create = (request, response) => {
     })
     .catch(function (error) {
         console.log(error);
-        response.status(500).send("Ocorreu um erro ao salvar o artigo");
+        response
+            .status(500)
+            .send("Ocorreu um erro ao salvar o artigo");
     })
 }; 
 
@@ -29,12 +36,20 @@ exports.findAll = (request, response) => {
         response.send(data)
     })
     .catch(function () {
-        response.status(500).send("Ocorreu um erro ao buscar todos os artigos")
+        response
+            .status(500)
+            .send("Ocorreu um erro ao buscar todos os artigos")
     })
 }
 
 exports.findByTitle = (request, response) => {
-    const tituloArtigo = request.query.titulo;
+    const { titulo: tituloArtigo} = request.query
+
+    if (!tituloArtigo) {
+        response
+            .status(400)
+            .send("Não foi possível buscar um artigo pois o título não foi enviado")
+    }
     tabelaArtigos
         .findOne({ where: {titulo: tituloArtigo} })
         .then(function (data) {
@@ -54,7 +69,13 @@ exports.findByTitle = (request, response) => {
 }
 
 exports.findById = (request, response) => {
-    const idArtigo = request.query.id
+    const { id: idArtigo} = request.query
+
+    if (!idArtigo) {
+        response
+            .status(400)
+            .send("Não foi possível buscar um artigo pois o ID não foi informado")
+    }
     tabelaArtigos
         .findByPk(idArtigo)
         .then(function (data) {
@@ -72,4 +93,14 @@ exports.findById = (request, response) => {
                 message: "Ocorreu um erro ao buscar um artigo com o título " + idArtigo,
             })
         })
+}
+
+//exemplo de atribuição e renomeação
+
+const desestruturaObj = () => {
+    const objExemplo = { id: 1}
+    //renomear por desestruturação
+    const { id: idOb } = objExemplo
+    //atribuir valor por desestruturação
+    const { name = "N/A"} = objExemplo
 }
